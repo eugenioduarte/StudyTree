@@ -5,17 +5,13 @@
  * and a "main" flow which the user will use once logged in.
  */
 import { ComponentProps } from "react";
-import {
-  NavigationContainer,
-  NavigatorScreenParams,
-} from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import {
   createNativeStackNavigator,
   NativeStackScreenProps,
 } from "@react-navigation/native-stack";
 
 import Config from "@/config";
-import { DemoNavigator, DemoTabParamList } from "./DemoNavigator";
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities";
 import AuthScreen from "@/screens/auth/AuthScreen";
 import DashboardScreen from "@/screens/dashboard/DashboardScreen";
@@ -26,7 +22,7 @@ import DashboardScreen from "@/screens/dashboard/DashboardScreen";
 export type AppStackParamList = {
   Welcome: undefined;
   Login: undefined;
-  Demo: NavigatorScreenParams<DemoTabParamList>;
+
   // 🔥 Suas novas rotas vão aqui
   // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
 };
@@ -58,7 +54,6 @@ const AppStack = () => {
       {isAuthenticated ? (
         <>
           <Stack.Screen name="Welcome" component={DashboardScreen} />
-          <Stack.Screen name="Demo" component={DemoNavigator} />
         </>
       ) : (
         <>
