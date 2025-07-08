@@ -5343,7 +5343,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-import@npm:^2.30.0":
+"eslint-plugin-import@npm:^2.30.0, eslint-plugin-import@npm:^2.32.0":
   version: 2.32.0
   resolution: "eslint-plugin-import@npm:2.32.0"
   dependencies:
@@ -5372,7 +5372,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-prettier@npm:^5.2.1":
+"eslint-plugin-prettier@npm:^5.5.1":
   version: 5.5.1
   resolution: "eslint-plugin-prettier@npm:5.5.1"
   dependencies:
@@ -5392,7 +5392,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-react-hooks@npm:^5.1.0":
+"eslint-plugin-react-hooks@npm:^5.1.0, eslint-plugin-react-hooks@npm:^5.2.0":
   version: 5.2.0
   resolution: "eslint-plugin-react-hooks@npm:5.2.0"
   peerDependencies:
@@ -11170,8 +11170,10 @@ __metadata:
     eslint: ^9.30.1
     eslint-config-expo: ~9.2.0
     eslint-config-prettier: ^10.1.5
-    eslint-plugin-prettier: ^5.2.1
+    eslint-plugin-import: ^2.32.0
+    eslint-plugin-prettier: ^5.5.1
     eslint-plugin-react: ^7.37.5
+    eslint-plugin-react-hooks: ^5.2.0
     eslint-plugin-react-native: ^5.0.0
     eslint-plugin-reactotron: ^0.1.2
     expo: ^53.0.15
@@ -11210,7 +11212,7 @@ __metadata:
     reactotron-react-native-mmkv: ^0.2.6
     ts-jest: ^29.1.1
     ts-node: ^10.9.2
-    typescript: ~5.8.3
+    typescript: ^5.8.3
     typescript-eslint: ^8.36.0
   languageName: unknown
   linkType: soft
@@ -11666,7 +11668,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:~5.8.3":
+"typescript@npm:^5.8.3":
   version: 5.8.3
   resolution: "typescript@npm:5.8.3"
   bin:
@@ -11676,7 +11678,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@~5.8.3#~builtin<compat/typescript>":
+"typescript@patch:typescript@^5.8.3#~builtin<compat/typescript>":
   version: 5.8.3
   resolution: "typescript@patch:typescript@npm%3A5.8.3#~builtin<compat/typescript>::version=5.8.3&hash=29ae49"
   bin:

@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    "app",
+    "test",
+    "types",
+    "plugins",
+    "babel.config.js",
+    "metro.config.js",
+    "jest.config.js",
+    "app.config.ts",
+    "index.tsx",
+    "eslint.config.mjs"
+  ]
+}

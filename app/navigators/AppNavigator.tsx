@@ -4,100 +4,87 @@
  * Generally speaking, it will contain an auth flow (registration, login, forgot password)
  * and a "main" flow which the user will use once logged in.
  */
-import { ComponentProps } from "react"
-import { NavigationContainer, NavigatorScreenParams } from "@react-navigation/native"
-import { createNativeStackNavigator, NativeStackScreenProps } from "@react-navigation/native-stack"
+import { ComponentProps } from "react";
+import {
+  NavigationContainer,
+  NavigatorScreenParams,
+} from "@react-navigation/native";
+import {
+  createNativeStackNavigator,
+  NativeStackScreenProps,
+} from "@react-navigation/native-stack";
 
-import Config from "@/config"
-import { useAuth } from "@/context/AuthContext"
-import { ErrorBoundary } from "@/screens/ErrorScreen/ErrorBoundary"
-import { LoginScreen } from "@/screens/LoginScreen"
-import { WelcomeScreen } from "@/screens/WelcomeScreen"
-import { useAppTheme } from "@/theme/context"
-
-import { DemoNavigator, DemoTabParamList } from "./DemoNavigator"
-import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
+import Config from "@/config";
+import { DemoNavigator, DemoTabParamList } from "./DemoNavigator";
+import { navigationRef, useBackButtonHandler } from "./navigationUtilities";
+import AuthScreen from "@/screens/auth/AuthScreen";
+import DashboardScreen from "@/screens/dashboard/DashboardScreen";
 
 /**
- * This type allows TypeScript to know what routes are defined in this navigator
- * as well as what properties (if any) they might take when navigating to them.
- *
- * For more information, see this documentation:
- *   https://reactnavigation.org/docs/params/
- *   https://reactnavigation.org/docs/typescript#type-checking-the-navigator
- *   https://reactnavigation.org/docs/typescript/#organizing-types
+ * Define as rotas do app e seus parâmetros.
  */
 export type AppStackParamList = {
-  Welcome: undefined
-  Login: undefined
-  Demo: NavigatorScreenParams<DemoTabParamList>
-  // 🔥 Your screens go here
+  Welcome: undefined;
+  Login: undefined;
+  Demo: NavigatorScreenParams<DemoTabParamList>;
+  // 🔥 Suas novas rotas vão aqui
   // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
-}
+};
 
 /**
- * This is a list of all the route names that will exit the app if the back button
- * is pressed while in that screen. Only affects Android.
+ * Rotas nas quais o botão de voltar sai do app (Android).
  */
-const exitRoutes = Config.exitRoutes
+const exitRoutes = Config.exitRoutes;
 
-export type AppStackScreenProps<T extends keyof AppStackParamList> = NativeStackScreenProps<
-  AppStackParamList,
-  T
->
+export type AppStackScreenProps<T extends keyof AppStackParamList> =
+  NativeStackScreenProps<AppStackParamList, T>;
 
-// Documentation: https://reactnavigation.org/docs/stack-navigator/
-const Stack = createNativeStackNavigator<AppStackParamList>()
+const Stack = createNativeStackNavigator<AppStackParamList>();
 
 const AppStack = () => {
-  const { isAuthenticated } = useAuth()
-
-  const {
-    theme: { colors },
-  } = useAppTheme()
+  const isAuthenticated = true;
 
   return (
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
-        navigationBarColor: colors.background,
+        navigationBarColor: "red",
         contentStyle: {
-          backgroundColor: colors.background,
+          backgroundColor: "red",
         },
       }}
       initialRouteName={isAuthenticated ? "Welcome" : "Login"}
     >
       {isAuthenticated ? (
         <>
-          <Stack.Screen name="Welcome" component={WelcomeScreen} />
-
+          <Stack.Screen name="Welcome" component={DashboardScreen} />
           <Stack.Screen name="Demo" component={DemoNavigator} />
         </>
       ) : (
         <>
-          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="Login" component={AuthScreen} />
         </>
       )}
 
-      {/** 🔥 Your screens go here */}
+      {/** 🔥 Suas novas rotas vão aqui */}
       {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
     </Stack.Navigator>
-  )
-}
+  );
+};
 
-export interface NavigationProps
-  extends Partial<ComponentProps<typeof NavigationContainer<AppStackParamList>>> {}
+/**
+ * Props para o componente AppNavigator.
+ */
+export type NavigationProps = Partial<
+  ComponentProps<typeof NavigationContainer<AppStackParamList>>
+>;
 
 export const AppNavigator = (props: NavigationProps) => {
-  const { navigationTheme } = useAppTheme()
-
-  useBackButtonHandler((routeName) => exitRoutes.includes(routeName))
+  useBackButtonHandler((routeName) => exitRoutes.includes(routeName));
 
   return (
-    <NavigationContainer ref={navigationRef} theme={navigationTheme} {...props}>
-      <ErrorBoundary catchErrors={Config.catchErrors}>
-        <AppStack />
-      </ErrorBoundary>
+    <NavigationContainer ref={navigationRef} {...props}>
+      <AppStack />
     </NavigationContainer>
-  )
-}
+  );
+};
